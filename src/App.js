@@ -2,21 +2,38 @@ import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import withRoot from './withRoot';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+
+
+//import customized components
+import AppBarComponent from './components/appBarComponent';
+import AnalyticalForm from './components/analyticalFormComponent';
+
 
 const styles = theme => ({
   root: {
-    textAlign: 'center',
-    paddingTop: theme.spacing.unit * 20,
+    flexGrow: 1,
   },
 });
 
 class App extends Component{
-
   render(){
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <h1>Hey! It works. Go ahead and start customizing...</h1>
+      <Grid
+        container
+        alignItems="center"
+        justify="center">
+        <Grid item xs={10}>
+        <AppBarComponent />
+        <br/>
+        <Paper>
+          <AnalyticalForm />
+        </Paper>
+        </Grid>
+      </Grid>
       </div>
     );
   }
