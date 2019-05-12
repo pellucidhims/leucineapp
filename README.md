@@ -1,16 +1,16 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)<br>
 `Create React App` is wrapped with [Material UI](https://material-ui.com/)
 
-##About
+## About
 
 This is a template React application wrapped with Material UI.
 
-##Local Installation
+## Local Installation
 
 1. Clone the git repository in your local machine.
-2. Open `cmd` or `git bash` or `cli` and in the root directory of the project run:<br>
+2. Open `cmd` or `git bash` or `cli` and in the root directory of the project and run:<br>
     `npm install`<br>
-3. Allow dependencies to install and then in the root directory of the project run:<br>
+3. Allow dependencies to install and then in the root directory of the project and run:<br>
     `npm start`<br>
 4. This will start the app in development mode which can be accessed at:<br>
 [http://localhost:3000](http://localhost:3000) in the browser.
