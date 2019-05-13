@@ -65,8 +65,7 @@ export default class MocSection extends Component {
   }
 
   handleDeleteMoc=(idx)=>e=>{
-    console.log(this.props,":idx:",idx);
-    //this.props.deleteMocItem(this.props.mocItemDetail.id)
+    this.props.deleteMocItem(idx);
   }
 
   render(){

@@ -80,7 +80,7 @@ export default class SwabSamplingBox extends Component{
     }
   }
 
-  deleteMocItemFun=(e)=>{
+  deleteMocItemFunc=(e)=>{
     console.log("Delete entry :",e);
     let newList = this.state.mocList.filter((item)=>{return item.id!==e});
     this.setState({
@@ -96,7 +96,7 @@ export default class SwabSamplingBox extends Component{
         {this.state.mocList.map((mocItem,index)=>{
         console.log("this is current mocItem: ",mocItem);
         return(
-            <MocSection key={mocItem.id} mocItemDetail={mocItem} deleteMocItem={this.deleteMocItemFunc}/>
+            <MocSection mocItemDetail={mocItem} deleteMocItem={this.deleteMocItemFunc}/>
           )
       })}
     </div>)
