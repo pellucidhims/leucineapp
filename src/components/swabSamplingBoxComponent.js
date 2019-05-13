@@ -64,9 +64,7 @@ export default class SwabSamplingBox extends Component{
       this.setState({
         mocList: this.state.mocList.concat(mocItem),
         mocSectionActive: false
-      },()=>{
-        console.log("mocList:: ",this.state.mocList);
-        return this.renderMocItemFunction()})
+      })
     }else if(!this.state.mocSectionActive && this.state.mocList.length >0){
       let mocItem = {
         id: this.state.mocList.length,
@@ -78,22 +76,33 @@ export default class SwabSamplingBox extends Component{
       this.setState({
         mocList: this.state.mocList.concat(mocItem),
         mocSectionActive: false
-      },()=>{
-        console.log("mocList:: ",this.state.mocList);
-        this.renderMocItemFunction()})
+      })
     }
+  }
+
+  deleteMocItemFun=(e)=>{
+    console.log("Delete entry :",e);
+    let newList = this.state.mocList.filter((item)=>{return item.id!==e});
+    this.setState({
+      mocList: newList
+    })
   }
 
   renderMocItemFunction=()=>{
     console.log("inside renderMocItemFunction: ",this.state.mocList);
-    return this.state.mocList.map((mocItem,index)=>{
-      return(
-        <div key={mocItem.id}>
-          <MocSection mocItemDetail={mocItem}/>
-        </div>
-      )
-    })
+    return (
+      <div style={{width:'80%'}}>
+      <h2>MOC Section</h2>
+        {this.state.mocList.map((mocItem,index)=>{
+        console.log("this is current mocItem: ",mocItem);
+        return(
+            <MocSection key={mocItem.id} mocItemDetail={mocItem} deleteMocItem={this.deleteMocItemFunc}/>
+          )
+      })}
+    </div>)
   }
+
+
 
   render(){
     return(
@@ -134,7 +143,7 @@ export default class SwabSamplingBox extends Component{
         </Grid>
         <Grid
           container
-          direction="row"
+          direction="column"
           justify="space-around"
           alignItems="center"
           spacing={24}
@@ -150,12 +159,15 @@ export default class SwabSamplingBox extends Component{
                  </Button>
                </Grid>) : ''
             }
+            {this.state.mocList.length>0?
+              this.renderMocItemFunction():''
+            }
             {
               !this.state.mocSectionActive && this.state.mocList.length > 0?
               (
                 <Button
                   onClick={this.renderMocSection}
-                  variant="outlined"
+                  variant="contained"
                   color="primary"
                 >
                   Add Another

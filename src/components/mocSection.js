@@ -2,6 +2,9 @@ import React,{Component} from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import {moc} from '../data/dummyData';
 
@@ -61,18 +64,39 @@ export default class MocSection extends Component {
     )
   }
 
+  handleDeleteMoc=(idx)=>e=>{
+    console.log(this.props,":idx:",idx);
+    //this.props.deleteMocItem(this.props.mocItemDetail.id)
+  }
+
   render(){
     console.log("INside MOC SECTION WITH PROP: ", this.props);
     const mocItem = this.props.mocItemDetail;
     return(
-      <div>
-        <Grid item xs={8}>
+      <Grid
+        container
+        direction="row"
+        justify="space-around"
+        alignItems="center"
+        spacing={24}
+        style={{backgroundColor:'yellow'}}
+      >
+        <Grid item xs={6}>
            {this.renderSelectField(mocItem.id+'-mocText','text',mocItem.textLabel,true)}
         </Grid>
         <Grid item xs={4}>
           {this.renderMocTextField(mocItem.id+'-mocRecovery','number',mocItem.numLabel,true)}
         </Grid>
-      </div>
+        <Grid item xs={2}>
+          <Tooltip title="Remove MOC entry">
+          <IconButton
+            onClick={this.handleDeleteMoc(mocItem.id)}
+          >
+            <DeleteIcon />
+          </IconButton>
+          </Tooltip>
+        </Grid>
+      </Grid>
     );
   }
 }
