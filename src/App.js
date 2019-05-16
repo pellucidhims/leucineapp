@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 //import customized components
 import AppBarComponent from './components/appBarComponent';
 import AnalyticalForm from './components/analyticalFormComponent';
-
+import ConformationButtons from './components/conformationButtonsComponent';
 
 const styles = theme => ({
   root: {
@@ -32,6 +32,7 @@ class App extends Component{
         <Paper>
           <AnalyticalForm />
         </Paper>
+        <ConformationButtons />
         </Grid>
       </Grid>
       </div>

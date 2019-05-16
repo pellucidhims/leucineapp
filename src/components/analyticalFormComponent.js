@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 import TypeResidueBox1 from './typeResidueBox1';
 import TypeResidueBox2 from './typeResidueBox2'
@@ -117,6 +118,7 @@ class AnalyticalForm extends Component {
 
   render(){
     return(
+        <Grid container >
         <Grid
           container
           justify='center'
@@ -126,6 +128,7 @@ class AnalyticalForm extends Component {
               {this.renderMainKeys(textFields)}
             </div>
           </Grid>
+        </Grid>
         </Grid>
     );
   }
