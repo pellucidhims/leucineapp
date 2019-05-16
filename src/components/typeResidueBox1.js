@@ -6,6 +6,12 @@ import TextField from '@material-ui/core/TextField';
 import RinseSamplingBox from './rinseSamplingBoxComponent';
 import SwabSamplingBox from './swabSamplingBoxComponent';
 
+const errorParaStyle = {
+  backgroundColor:'red',
+  color:'white',
+  textAlign:'center'
+}
+
 export default class TypeResidueBox1 extends Component {
   constructor(props) {
     super(props);
@@ -13,20 +19,29 @@ export default class TypeResidueBox1 extends Component {
       lodValue: '',
       loqValue: '',
       swabSamplingOn: false,
-      rinseSamplingOn: false
+      rinseSamplingOn: false,
+      set_err_msg_txt: ''
     }
   }
 
   handleChange=(id)=>e=>{
     this.setState({
-      [id]: e.target.value
+      [id]: e.target.value,
+      set_err_msg_txt:''
     })
   }
 
   handleSamplingConfig=(samplingType)=>e=>{
-    this.setState({
-      [samplingType]: !this.state[samplingType]
-    })
+    if((this.state.lodValue.trim()===""||this.state.loqValue.trim()==="")){
+      this.setState({
+        set_err_msg_txt: 'Please enter the required LOD and LOQ values'
+      })
+    }else{
+      this.setState({
+        [samplingType]: !this.state[samplingType]
+      })
+    }
+
   }
 
   renderSwabSamplingBox=()=>{
@@ -41,7 +56,7 @@ export default class TypeResidueBox1 extends Component {
 
   renderRinseSamplingBox=()=>{
     return(
-      <div style={{backgroundColor:'darkgrey',marginTop:'1rem'}}>\
+      <div style={{backgroundColor:'darkgrey',marginTop:'1rem'}}>
         <Grid container>
           <RinseSamplingBox />
         </Grid>
@@ -69,7 +84,7 @@ export default class TypeResidueBox1 extends Component {
 
   render(){
     return(
-      <div style={{backgroundColor:'#eeeeee'}}>
+      <div style={{backgroundColor:'#eeeeee',borderRadius:'4px'}}>
       <Grid
         container
         direction="row"
@@ -81,6 +96,17 @@ export default class TypeResidueBox1 extends Component {
         </Grid>
         <Grid item>
           {this.renderTextFields('loqValue','number','LOQ(in ppm)',true)}
+        </Grid>
+      </Grid>
+      <Grid
+        container
+        direction="row"
+        justify="space-around"
+        alignItems="center"
+        spacing={24}
+      >
+        <Grid item xs={11}>
+        <p style={errorParaStyle}>{this.state.set_err_msg_txt}</p>
         </Grid>
       </Grid>
       <div>

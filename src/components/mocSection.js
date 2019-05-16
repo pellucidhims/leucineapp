@@ -8,18 +8,33 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import {moc} from '../data/dummyData';
 
+const mocItemStyle = {
+  backgroundColor:'yellow',
+  borderRadius:'2px',
+  border:'solid 1px black'
+}
+
 export default class MocSection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mocValue: '',
-      numValue: ''
+      mocVal: '',
+      numVal: '',
     }
   }
 
+
   handleChange=(field)=>e=>{
+    console.log("e.target val: ",e.target.value );
       this.setState({
         [field]: e.target.value
+      },()=>{
+        let retMocItem = {
+          id: this.props.mocItemDetail.id,
+          mocVal: this.state.mocVal,
+          mocRecVal: this.state.numVal
+        }
+        this.props.updateMocItem(retMocItem);
       })
   }
 
@@ -32,8 +47,8 @@ export default class MocSection extends Component {
         placeholder={label}
         margin="normal"
         variant="outlined"
-        value={this.state.mocValue}
-        onChange={this.handleChange('mocValue')}
+        value={this.state.mocVal}
+        onChange={this.handleChange('mocVal')}
         fullWidth
         required = {req}
       >
@@ -56,8 +71,8 @@ export default class MocSection extends Component {
               type={type}
               margin="normal"
               variant="outlined"
-              value={this.state.numValue}
-              onChange={this.handleChange('numValue')}
+              value={this.state.numVal}
+              onChange={this.handleChange('numVal')}
               fullWidth
               required = {req}
             />
@@ -71,31 +86,32 @@ export default class MocSection extends Component {
   render(){
     console.log("INside MOC SECTION WITH PROP: ", this.props);
     const mocItem = this.props.mocItemDetail;
-    return(
-      <Grid
-        container
-        direction="row"
-        justify="space-around"
-        alignItems="center"
-        spacing={24}
-        style={{backgroundColor:'yellow'}}
-      >
-        <Grid item xs={6}>
-           {this.renderSelectField(mocItem.id+'-mocText','text',mocItem.textLabel,true)}
+    console.log("mocItem: ",mocItem, " this.state.mocValue: ", this.state.mocVal, " this.state.numValue: ", this.state.numVal);
+      return(
+        <Grid
+          container
+          direction="row"
+          justify="space-around"
+          alignItems="center"
+          spacing={24}
+          style={mocItemStyle}
+        >
+          <Grid item xs={6}>
+             {this.renderSelectField(mocItem.id+'-mocText','text',mocItem.textLabel,true)}
+          </Grid>
+          <Grid item xs={4}>
+            {this.renderMocTextField(mocItem.id+'-mocRecovery','number',mocItem.numLabel,true)}
+          </Grid>
+          <Grid item xs={2}>
+            <Tooltip title="Remove MOC entry">
+            <IconButton
+              onClick={this.handleDeleteMoc(mocItem.id)}
+            >
+              <DeleteIcon />
+            </IconButton>
+            </Tooltip>
+          </Grid>
         </Grid>
-        <Grid item xs={4}>
-          {this.renderMocTextField(mocItem.id+'-mocRecovery','number',mocItem.numLabel,true)}
-        </Grid>
-        <Grid item xs={2}>
-          <Tooltip title="Remove MOC entry">
-          <IconButton
-            onClick={this.handleDeleteMoc(mocItem.id)}
-          >
-            <DeleteIcon />
-          </IconButton>
-          </Tooltip>
-        </Grid>
-      </Grid>
-    );
+      ); 
   }
 }
