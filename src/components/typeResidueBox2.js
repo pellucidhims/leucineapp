@@ -63,15 +63,26 @@ export default class TypeResidueBox2 extends Component {
         this.setState({
           set_err_msg_txt: 'Please enter the required TNTC and TFTC values'
         })
+      if(this.state.methodUsed.trim()===""){
+        this.setState({
+          set_err_msg_txt: 'Please enter the method used'
+        })
+      }
       }else{
         this.setState({
           [samplingType]: !this.state[samplingType]
         })
       }
     }else{
-      this.setState({
-        [samplingType]: !this.state[samplingType]
-      })
+      if(this.state.methodUsed.trim()===""){
+        this.setState({
+          set_err_msg_txt: 'Please enter the method used'
+        })
+      }else{
+        this.setState({
+          [samplingType]: !this.state[samplingType]
+        })
+      }
     }
   }
 

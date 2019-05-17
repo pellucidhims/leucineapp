@@ -6,6 +6,10 @@ export default class ConformationButtons extends Component {
     super(props);
   }
 
+  resetFields=()=>{
+    window.location.reload();
+  }
+
   render(){
     return(
       <div style={{position:'fixed',bottom:'5%',right:'10%'}}>
@@ -13,6 +17,7 @@ export default class ConformationButtons extends Component {
             <Button
               color="primary"
               variant="outlined"
+              onClick={this.resetFields}
               style={{textAlign:'center'}}>CANCEL</Button>
           </div>
           <div style={{display:'inline-block',float:'right'}}>
